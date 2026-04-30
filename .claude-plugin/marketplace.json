@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "xmind",
+  "owner": {
+    "name": "Xmind Ltd",
+    "email": "support@xmind.com"
+  },
+  "description": "Create and edit Xmind mind maps from AI agents — local files or live cloud documents",
+  "homepage": "https://github.com/xmindltd/xmind-cli",
+  "plugins": [
+    {
+      "name": "xmind",
+      "description": "Create and edit Xmind mind maps from AI agents — local files or live cloud documents",
+      "source": "./",
+      "skills": [
+        "./skills/xmind-file",
+        "./skills/xmind-cloud",
+        "./skills/xmind-illustrated-map"
+      ]
+    }
+  ]
+}
