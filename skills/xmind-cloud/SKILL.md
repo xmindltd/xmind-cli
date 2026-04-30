@@ -1,9 +1,9 @@
 ---
 name: xmind-cloud
-description: Interact with XMind online mindmaps. Use when the user wants to read, edit, or create cloud mindmaps in real-time.
+description: Interact with Xmind online mind maps. Use when the user wants to read, edit, or create cloud mind maps in real-time.
 ---
 
-# XMind Cloud CLI
+# Xmind Cloud CLI
 
 ## Setup
 

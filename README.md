@@ -1,6 +1,6 @@
 # xmind-cli
 
-XMind for AI agents — create and edit `.xmind` mind maps from Claude Code, Cursor, Codex, Gemini CLI and more.
+Xmind for AI agents — create and edit `.xmind` mind maps from Claude Code, Cursor, Codex, Gemini CLI and more.
 
 Works on local files and live cloud documents at [xmind.app](https://xmind.app).
 
@@ -38,11 +38,11 @@ Once installed, just talk to your agent:
 
 > *"Make a mind map about the evolution of transportation, with images for each era."*
 
-The agent picks the right skill, plans the structure, generates content, and produces a `.xmind` file you can open in [XMind](https://xmind.com).
+The agent picks the right skill, plans the structure, generates content, and produces a `.xmind` file you can open in [Xmind](https://xmind.com).
 
 ## Links
 
-- [XMind](https://xmind.com) — desktop and cloud apps that read `.xmind` files
+- [Xmind](https://xmind.com) — desktop and cloud apps that read `.xmind` files
 - [Agent Skills spec](https://github.com/anthropics/skills) — the format these skills follow
 
 ## License

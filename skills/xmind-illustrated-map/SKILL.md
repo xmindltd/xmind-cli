@@ -1,9 +1,9 @@
 ---
 name: xmind-illustrated-map
-description: Create XMind mind maps with generated topic images via a contact-sheet workflow. Requires an image generation capability (built-in for Codex / Gemini CLI, or an external image API). Use for illustrated maps; for text-only maps, use xmind-file.
+description: Create Xmind mind maps with generated topic images via a contact-sheet workflow. Requires an image generation capability (built-in for Codex / Gemini CLI, or an external image API). Use for illustrated maps; for text-only maps, use xmind-file.
 ---
 
-# XMind Illustrated Map
+# Xmind Illustrated Map
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Minimal artifacts:
 - `<file>.xmind` — the final map to enrich
 - `plan.json` — visual slot mapping
 - `prompt.txt` — debug copy of the prompt
-- `contact-sheet.png` — final local raster file for attach
+- `contact-sheet.png` — final local raster file for attachment
 
 Do not treat an inline preview or a remembered generated asset as completion. Attach only after `contact-sheet.png` exists as a real local file.
 
@@ -127,7 +127,7 @@ After generation, ensure the final raster exists as a local file:
 contact-sheet.png
 ```
 
-The image may initially be under `$HOME/.codex/generated_images/...`; move or copy it into the run directory before attach.
+The image may initially be under `$HOME/.codex/generated_images/...`; move or copy it into the run directory before attaching.
 
 ### 6. Attach images
 

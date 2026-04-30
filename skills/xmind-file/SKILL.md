@@ -3,7 +3,7 @@ name: xmind-file
 description: Create and edit local .xmind mind map files via the xmind CLI. Use for text-only mind maps; for illustrated maps with generated images, use xmind-illustrated-map instead.
 ---
 
-# XMind File
+# Xmind File
 
 ## Setup
 
