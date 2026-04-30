@@ -7,7 +7,7 @@ description: Create Xmind mind maps with generated topic images via a contact-sh
 
 ## Prerequisites
 
-- xmind CLI installed (`npm i -g xmind-cli`)
+- xmind CLI installed (`npm i -g @xmindltd/xmind-cli`)
 - An image generation capability:
   - Codex / Gemini CLI: built-in `image_gen` works out of the box
   - Other agents: configure an external image API and produce a single contact-sheet image as a local file
