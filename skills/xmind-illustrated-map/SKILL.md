@@ -7,7 +7,7 @@ description: Create XMind mind maps with generated topic images via a contact-sh
 
 ## Prerequisites
 
-- xmind CLI installed (`npm i -g xmind-cli`, or load the bundled tarball as in xmind-file's Setup section)
+- xmind CLI installed (`npm i -g xmind-cli`)
 - An image generation capability:
   - Codex / Gemini CLI: built-in `image_gen` works out of the box
   - Other agents: configure an external image API and produce a single contact-sheet image as a local file
@@ -173,5 +173,5 @@ For `The Evolution of Transportation`:
 - Run `image-plan ... --output plan.json --prompt-output prompt.txt --topics-output topics.json`
 - Generate one 3x2 contact sheet with the agent's image gen capability
 - Put the generated raster at `contact-sheet.png`
-- Run `enrich-images output.xmind --use-plan plan.json --contact-sheet contact-sheet.png`
+- Run `xmind enrich-images output.xmind --use-plan plan.json --contact-sheet contact-sheet.png`
 - Verify the `.xmind` zip contains 6 embedded resources
