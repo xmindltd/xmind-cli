@@ -8,7 +8,7 @@ description: Create and edit local .xmind mind map files via the xmind CLI. Use 
 ## Setup
 
 ```bash
-which xmind || npm install -g xmind-cli
+which xmind || npm install -g @xmindltd/xmind-cli
 ```
 
 ## Create

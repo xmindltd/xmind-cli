@@ -8,7 +8,7 @@ description: Interact with Xmind online mind maps. Use when the user wants to re
 ## Setup
 
 ```bash
-which xmind || npm install -g xmind-cli
+which xmind || npm install -g @xmindltd/xmind-cli
 ```
 
 ## Auth

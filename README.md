@@ -8,7 +8,7 @@ Works on local files and live cloud documents at [xmind.app](https://xmind.app).
 
 ```bash
 # 1. Install the CLI
-npm install -g xmind-cli
+npm install -g @xmindltd/xmind-cli
 
 # 2. Install skills into your agent's skill directory
 npx skills add xmindltd/xmind-cli
@@ -30,7 +30,7 @@ npx skills add xmindltd/xmind-cli -s xmind-file,xmind-cloud
 | [`xmind-cloud`](skills/xmind-cloud/SKILL.md) | Real-time editing on [xmind.app](https://xmind.app) | `xmind cloud auth / open / batch / upload` |
 | [`xmind-illustrated-map`](skills/xmind-illustrated-map/SKILL.md) | Mind maps with generated topic images (requires image-gen agent) | `xmind image-plan / enrich-images` |
 
-This repository is the install entry — the three `SKILL.md` files distributed via `npx skills add` and the marketplace declaration in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). The CLI binary and the knowledge it loads on demand ship via `npm install -g xmind-cli`.
+This repository is the install entry — the three `SKILL.md` files distributed via `npx skills add` and the marketplace declaration in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). The CLI binary and the knowledge it loads on demand ship via `npm install -g @xmindltd/xmind-cli`.
 
 ## Quick start
 
