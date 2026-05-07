@@ -45,20 +45,20 @@ xmind cloud auth token <value>
 xmind skill list
 ```
 
-Review all available recipes, layout features, and editing helpers.
+Review all available domains, render strategies, and edit strategies.
 
 ### Step 2: Load Skills + Execute
 
-Load a recipe and a feature strategy in one call:
+Load domain, render, and strategy in one call:
 
 ```bash
-xmind skill show recipes/<name> features features/strategy/<name>
+xmind skill show domain/<name> render render/strategy/<name>
 ```
 
 Then follow the loaded instructions:
 
-1. **Phase 1 — Content**: Follow recipe rules to plan content.
-2. **Phase 2 — Render**: Follow features + strategy rules to produce markdown, select skeleton and color. **Substitute the execute command** with cloud upload:
+1. **Phase 1 — Content**: Follow domain rules to plan content.
+2. **Phase 2 — Render**: Follow render + strategy rules to produce markdown, select skeleton and color. **Substitute the execute command** with cloud upload:
 
    ```bash
    cat <<'MD' | xmind cloud create --stdin --skeleton <name> --color <name>
@@ -73,7 +73,7 @@ Then follow the loaded instructions:
 If a subtree needs a different strategy during Phase 2:
 
 ```bash
-xmind skill show features/strategy/<other>
+xmind skill show render/strategy/<other>
 ```
 
 ## Edit
@@ -104,7 +104,7 @@ BATCH_EOF
 For complex edits (optimize, review, restructure, restyle), load the edit guide:
 
 ```bash
-xmind skill show editing/guide
+xmind skill show edit/guide
 ```
 
 Follow the guide's analysis template, then apply changes via `xmind cloud batch --session <id>`.
