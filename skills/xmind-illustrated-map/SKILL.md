@@ -48,7 +48,7 @@ Default routing:
 Then load the matching guidance:
 
 ```bash
-xmind skill show recipes/default features features/strategy/<name>
+xmind skill show domain/default render render/strategy/<name>
 ```
 
 ### 2. Build the markdown first
