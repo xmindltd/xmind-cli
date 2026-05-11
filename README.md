@@ -9,7 +9,7 @@
 
 **Mind maps, by AI agents.**
 
-Create local `.xmind` files, edit cloud documents live on [app.xmind.com](https://app.xmind.com), and generate illustrated mind maps — all from your AI agent through a single CLI.
+Create local `.xmind` files, edit cloud documents live on [app.xmind.com](https://app.xmind.com), and generate illustrated mind maps — all from your AI agent through one CLI and three focused skills.
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install -g @xmindltd/xmind-cli
 npx skills add xmindltd/xmind-cli -y
 ```
 
-The second command auto-detects your installed agents (Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Windsurf, GitHub Copilot, Antigravity) and symlinks the skill files into the right place (the `-y` flag skips prompts in non-interactive environments).
+The second command detects supported agents such as Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Windsurf, GitHub Copilot, and Antigravity, then installs the skills into their skill directories. The `-y` flag skips prompts in non-interactive environments.
 
 To install only specific skills:
 
@@ -29,13 +29,29 @@ To install only specific skills:
 npx skills add xmindltd/xmind-cli -s xmind-file,xmind-cloud -y
 ```
 
+Verify the CLI and bundled skill guidance:
+
+```bash
+xmind skill list
+```
+
+---
+
+## Quick start
+
+Ask your agent:
+
+> _"Create a local Xmind mind map about Apollo 11."_
+
+The agent should load the `xmind-file` skill, use domain guidance and render strategies, then write a `.xmind` file through the CLI.
+
 ---
 
 ## What you can build
 
 ### Local `.xmind` files
 
-A Domain Expert plans the structure; a Render Expert picks the skeleton and color theme. The result is a `.xmind` file.
+Domain guidance plans the structure; render strategies pick the skeleton and color theme. The result is a `.xmind` file.
 
 > _"Create a mind map about Apollo 11."_
 
@@ -63,11 +79,11 @@ Read, edit, and create real-time documents on [app.xmind.com](https://app.xmind.
 
 ![12 Olympian gods illustrated mind map with AI-generated portraits](assets/xmind-illustrated.png)
 
-A Domain Expert plans the structure; an Image Studio generates an AI illustration for every topic. The result is an illustrated `.xmind` file.
+Domain guidance plans the structure; render strategies create the base map; your agent generates one contact-sheet image; the CLI embeds the sliced images into the `.xmind` file.
 
 > _"Illustrated mind map of the 12 Olympian gods."_
 
-**`xmind image-plan`** / `enrich-images`
+**`xmind create`** / `image-plan` / generate `contact-sheet.png` / `enrich-images`
 
 **Requires:** image generation (Codex) · **Skill:** [`xmind-illustrated-map`](skills/xmind-illustrated-map/SKILL.md)
 
@@ -75,9 +91,9 @@ A Domain Expert plans the structure; an Image Studio generates an AI illustratio
 
 ## How it works
 
-Skills load on demand from your agent's skill directory. The roles named above (Domain Expert, Render Expert, Image Studio, Cloud Auth, Live Edit) are internal stages each skill bundles; the agent runs them in sequence.
+Skills load on demand from your agent's skill directory. Each skill bundles domain guidance, render strategies, and edit guidance; the agent runs the relevant pieces for the task.
 
-The CLI binary (`xmind ...`) is the only external piece — after `npx skills add`, nothing else needs configuration.
+The CLI binary (`xmind ...`) is the only external runtime. Local `.xmind` workflows work after install; cloud workflows require `xmind cloud auth login`; illustrated workflows require an agent or external service that can produce a local contact-sheet image.
 
 ---
 
