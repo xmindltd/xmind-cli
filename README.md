@@ -7,112 +7,106 @@
 [![npm version](https://img.shields.io/npm/v/@xmindltd/xmind-cli.svg)](https://www.npmjs.com/package/@xmindltd/xmind-cli)
 [![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**Mind maps, by AI agents.**
+**Create local Xmind mind maps with AI agents.**
 
-Create local `.xmind` files, edit cloud documents live on [app.xmind.com](https://app.xmind.com), and generate illustrated mind maps — all from your AI agent through one CLI and three focused skills.
+`xmind-cli` gives agents a reliable local-file workflow for `.xmind` maps:
+generate structured maps, inspect and validate files, apply edits, attach
+images, and report Xmind credits used by premium features.
 
 ## Install
 
 ```bash
-# 1. Install the CLI
 npm install -g @xmindltd/xmind-cli
-
-# 2. Install skills into your agent's skill directory
 npx skills add xmindltd/xmind-cli -y
 ```
 
-The second command detects supported agents such as Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Windsurf, GitHub Copilot, and Antigravity, then installs the skills into their skill directories. The `-y` flag skips prompts in non-interactive environments.
-
-To install only specific skills:
-
-```bash
-npx skills add xmindltd/xmind-cli -s xmind-file,xmind-cloud -y
-```
-
-Verify the CLI and bundled skill guidance:
+The skill install command adds the `xmind-file` skill to supported agent skill
+directories. Verify the CLI and available guidance:
 
 ```bash
 xmind skill list
+xmind auth status
 ```
 
----
+If needed, sign in once:
 
-## Quick start
+```bash
+xmind auth login
+```
+
+## Quick Start
 
 Ask your agent:
 
-> _"Create a local Xmind mind map about Apollo 11."_
+> Create a local Xmind mind map about Apollo 11.
 
-The agent should load the `xmind-file` skill, use domain guidance and render strategies, then write a `.xmind` file through the CLI.
+The agent uses the `xmind-file` skill to choose a recipe, draft the map, build a
+generate spec, run `xmind generate`, validate the `.xmind`, and summarize the
+result.
 
----
+## What It Can Do
 
-## What you can build
+- Generate rich local `.xmind` files from semantic specs.
+- Create quick maps from Markdown.
+- Read, describe, and validate existing `.xmind` files.
+- Edit maps with add/update/delete/theme/layout/marker/label/batch commands.
+- Attach local images, stable public raster image URLs, or Wikipedia images.
+- Report actual billing as Xmind credits when premium features are used.
 
-### Local `.xmind` files
+Core commands:
 
-Domain guidance plans the structure; render strategies pick the skeleton and color theme. The result is a `.xmind` file.
+```bash
+xmind generate --spec generate.json -o output.xmind
+xmind generate check --spec generate.json
+xmind create --from-markdown draft.md -o output.xmind
+xmind read output.xmind
+xmind describe output.xmind
+xmind validate output.xmind --quiet
+xmind batch output.xmind
+xmind image output.xmind --topic "Topic" --wiki "Apollo 11"
+```
 
-> _"Create a mind map about Apollo 11."_
+## How Generation Works
 
-**`xmind create`** / `read` / `add` / `update` / `theme` / `batch` / `image`
+The agent supplies semantic judgment. The CLI handles mechanical execution.
 
-**Skill:** [`xmind-file`](skills/xmind-file/SKILL.md)
+1. The agent chooses a recipe for the user goal.
+2. The agent drafts Markdown with titles, hierarchy, and notes.
+3. The agent writes a generate spec with route intent, visual anchors, and image
+   targets.
+4. `xmind generate` selects the final structure/color, applies anchors and
+   images, validates the file, and returns JSON.
+5. The agent reports the output path, validation result, key design choices, and
+   any Xmind credits consumed.
 
----
+The JSON output includes execution facts such as `route.skeletonReason`,
+`route.colorReason`, `anchors.applied`, `billing.consumed`, `billing.balance`,
+`billing.unit`, and `downgraded`.
 
-### Live editing on app.xmind.com
+## Billing
 
-![AI Agent Platform 2026 OKRs edited live on app.xmind.com](assets/xmind-cloud.png)
+Some premium structures, themes, or recipe skills may consume Xmind credits.
+The CLI reports billing in JSON. Treat `billing.unit` as authoritative; these
+are **Xmind credits**, not OpenAI, Codex, model, or token credits.
 
-Read, edit, and create real-time documents on [app.xmind.com](https://app.xmind.com) — your agent appears as a co-editor on the same canvas as your team.
+If credits are unavailable, the CLI may downgrade to a free fallback unless the
+agent uses `--no-downgrade`.
 
-> _"Update the AI Agent Platform 2026 OKRs."_
+## This Repo
 
-**`xmind cloud open`** / `auth` / `batch` / `upload`
+This repository distributes the public agent skill entry point:
 
-**Setup:** `xmind cloud auth login` once (browser auth) · **Skill:** [`xmind-cloud`](skills/xmind-cloud/SKILL.md)
+- [`skills/xmind-file/SKILL.md`](skills/xmind-file/SKILL.md)
+- [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)
 
----
-
-### Illustrated mind maps
-
-![12 Olympian gods illustrated mind map with AI-generated portraits](assets/xmind-illustrated.png)
-
-Domain guidance plans the structure; render strategies create the base map; your agent generates one contact-sheet image; the CLI embeds the sliced images into the `.xmind` file.
-
-> _"Illustrated mind map of the 12 Olympian gods."_
-
-**`xmind create`** / `image-plan` / generate `contact-sheet.png` / `enrich-images`
-
-**Requires:** image generation (Codex) · **Skill:** [`xmind-illustrated-map`](skills/xmind-illustrated-map/SKILL.md)
-
----
-
-## How it works
-
-Skills load on demand from your agent's skill directory. Each skill bundles domain guidance, render strategies, and edit guidance; the agent runs the relevant pieces for the task.
-
-The CLI binary (`xmind ...`) is the only external runtime. Local `.xmind` workflows work after install; cloud workflows require `xmind cloud auth login`; illustrated workflows require an agent or external service that can produce a local contact-sheet image.
-
----
-
-## About this repo
-
-This repo ships:
-
-- The three `SKILL.md` files (distributed via `npx skills add`)
-- The marketplace declaration in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)
-
-The CLI binary itself ships separately via [`@xmindltd/xmind-cli`](https://www.npmjs.com/package/@xmindltd/xmind-cli) on npm.
-
----
+The CLI binary ships separately on npm as
+[`@xmindltd/xmind-cli`](https://www.npmjs.com/package/@xmindltd/xmind-cli).
 
 ## Links
 
-- [Xmind](https://xmind.com) — desktop and cloud apps that read `.xmind` files
-- [`@xmindltd/xmind-cli`](https://www.npmjs.com/package/@xmindltd/xmind-cli) — the npm package
-- [Agent Skills spec](https://github.com/anthropics/skills) — the format these skills follow
+- [Xmind](https://xmind.com) — apps that read `.xmind` files
+- [`@xmindltd/xmind-cli`](https://www.npmjs.com/package/@xmindltd/xmind-cli)
+- [Agent Skills spec](https://github.com/anthropics/skills)
 
 ## License
 
