@@ -13,9 +13,7 @@
       "description": "Create and edit Xmind mind maps from AI agents — local files or live cloud documents",
       "source": "./",
       "skills": [
-        "./skills/xmind-file",
-        "./skills/xmind-cloud",
-        "./skills/xmind-illustrated-map"
+        "./skills/xmind-file"
       ]
     }
   ]
