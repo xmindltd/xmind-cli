@@ -253,8 +253,8 @@ Use when the chosen recipe is `quick-map`.
 ## Images
 
 Image inputs can be user-provided local files, stable raster image URLs, or
-Wikipedia page images. Do not use AI-generated images in this skill; use
-`xmind-illustrated-map` for generated-image workflows.
+Wikipedia page images. Do not generate images as part of this skill. This
+repository does not distribute a generated-image workflow.
 
 Remote image URLs must be public raster images. SVG, private/local-network URLs,
 and non-image payloads are rejected.
