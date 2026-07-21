@@ -42,19 +42,18 @@ File commands require login.
 
 ## Recipe Choice
 
-Choose recipe before drafting.
+Run `xmind skill list` before drafting and treat its recipe catalog and triggers
+as the source of truth. Do not maintain a recipe inventory in this skill.
 
-Ask the user to choose before creating a new map when the request is broad and
-two or more recipes would produce meaningfully different artifacts. Offer 2-4
-domain-specific choices, for example:
+Choose directly when the user names a recipe or you have high confidence that
+one recipe best fits the requested artifact. Otherwise, recommend the best
+match, present 2-4 relevant catalog choices with a short description of how each
+would shape the artifact, and wait for the user to choose before drafting. When
+confidence is not high, bias toward user choice.
 
-- Quick overview: compact, `recipe/quick-map`, free-first.
-- Timeline narrative: sequence/history, `recipe/timeline-narrative`.
-- Deep knowledge map: concepts/tradeoffs, `recipe/default`.
-- Focused analysis: `recipe/swot`, `recipe/comparison-decision`, or
-  `recipe/process-playbook` only when the topic naturally matches.
-
-Do not use `quick-map` as an implicit fallback only because it is fast or free.
+This does not override CLI/server fallback. If `xmind skill show` returns
+`effective: "quick-map"` because premium recipe access or Xmind credits are not
+available, follow the effective recipe and explain the fallback plainly.
 
 ## Context Loading
 
@@ -117,17 +116,8 @@ For rich generation, write a semantic spec and let the CLI compile it.
 }
 ```
 
-Anchor families:
-
-- `layout`: local relation layouts on `###` or deeper nodes.
-- `group`: `boundary` / `summary` over sibling groups.
-- `focus`: `emphasis`, `callout`, `numbering`, or `relation`.
-- `image`: local file, stable raster URL, or Wikipedia image. Generate attaches
-  images last.
-
-Use `"auto"` baseline unless the user gave an override or you have a recorded
-reason. The Agent decides anchors semantically; do not invent decorative anchors
-only to satisfy a checklist.
+Follow Visual for baseline selection, anchor-family semantics, target selection,
+and its anchor quality gate.
 
 ## Semantic Quality Gate
 
@@ -158,21 +148,10 @@ validation cannot detect a shallow or semantically fake map.
 
    Follow recipe density, shape, semantic signals, notes posture, and self-check.
    First draft the visible heading skeleton, then add selective notes and anchor
-   candidates. For `recipe/default`, density is normally `deep`. Write pure
-   CommonMark to `/tmp/xmind-draft-<id>.md`.
+   candidates. Write pure CommonMark to `/tmp/xmind-draft-<id>.md`.
 
-3. Write `/tmp/xmind-generate-<id>.json`.
-
-   The route fields are semantic declarations:
-
-   - `structuralType`: root relation family.
-   - `structureCommitment`: how strongly that root relation is required.
-   - `toneTag`: palette character.
-   - `density`: recipe density, not a skeleton choice.
-
-   For default maps, normally provide at least one real target in `layout`,
-   `group`, `focus`, and `image`, unless the user asked for text-only/no-images
-   or the subject has no useful concrete image anchor.
+3. Write `/tmp/xmind-generate-<id>.json` using the route and baseline semantics
+   defined by Visual.
 
 4. Preflight and optionally dry-run:
 
@@ -214,15 +193,9 @@ Use when the chosen recipe is `quick-map`.
    xmind skill show markdown-grammar recipe/quick-map --json
    ```
 
-2. Draft compact markdown, usually `light` or `standard`.
+2. Draft compact markdown according to the effective recipe.
 
-3. Pick a free baseline directly:
-
-   - overview/resource: `MindMap-1`
-   - triage/checklist: `Matrix-1`
-   - quick-plan/simple-process: `LogicChart-1`
-   - simple-timeline: `Timeline-1` or `Timeline-3`
-   - hierarchy: `OrgChart-1` or `TreeChart-1`
+3. Choose the mode and free skeleton from the effective recipe's mode table.
 
 4. Create and validate:
 
@@ -233,6 +206,12 @@ Use when the chosen recipe is `quick-map`.
 
    Run `read`/`describe` only if validation fails, the user asks, or a small
    repair is clearly needed.
+
+5. Communicate the boundary.
+
+   Tell the user this is a quick overview, not the full rich-map path. Offer to
+   regenerate with a fuller recipe if they want deeper titles/notes, visual
+   anchors, images, or premium-capable structure.
 
 ## Flow B: Edit Existing Map
 
@@ -267,6 +246,27 @@ xmind image <file>.xmind --topic "<topic title>" --input "<local-image-path>"
 xmind image <file>.xmind --topic "<topic title>" --url "<https-image-url>"
 xmind image <file>.xmind --topic "<topic title>" --wiki "<Wikipedia page title>"
 ```
+
+## Links
+
+Use `link` for a single topic. Local paths are resolved to absolute `file:///`
+URIs and URL-encoded in the same form written by Xmind Desktop:
+
+```bash
+xmind link <map>.xmind --topic "Reference" --url "https://example.com"
+xmind link <map>.xmind --topic "Local map" --file "../maps/example.xmind"
+xmind link <map>.xmind --topic "Reference" --remove
+```
+
+For batch edits, `href` accepts either `href` or `file` (exactly one):
+
+```json
+{"op":"href","topic":"Local map","file":"../maps/example.xmind"}
+```
+
+Local file links point to the original file; they do not embed or copy it into
+the `.xmind` archive. They work only on machines where that absolute path
+exists. Use an `https` URL when the map must be portable.
 
 ## Delivery Gate
 
@@ -308,3 +308,6 @@ validation/inspection.
 
 Final response: give the file path, validation result, and one or two important
 design choices. Do not dump the full outline unless asked.
+
+If the file was already open in Xmind, later CLI edits may not appear immediately;
+tell the user to close and reopen it in Xmind to refresh.
