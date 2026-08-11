@@ -38,7 +38,7 @@ xmind auth status
 If sign-in is required:
 
 ```bash
-xmind auth login
+xmind auth login <cn|global>
 ```
 
 Ask the user to complete authorization in the browser, then run `xmind auth status`
