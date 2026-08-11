@@ -23,7 +23,11 @@ which xmind || npm install -g "$(find ~/.claude /mnt/skills -name 'xmind-cli-*.t
 xmind auth status
 ```
 
-If unauthenticated, run `xmind auth login` or `xmind auth token <value>`.
+Choose the auth region before logging in: an explicit user choice takes
+precedence; otherwise, if the user communicates in Chinese, use `cn`, and use
+`global` for other languages. If unauthenticated, run `xmind auth login cn` or
+`xmind auth login global` accordingly. The CLI requires this region argument;
+tokens require the same choice: `xmind auth token <value> <cn|global>`.
 File commands require login.
 
 ## Core Boundary
