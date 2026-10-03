@@ -12,6 +12,7 @@
       "name": "xmind",
       "description": "Create and edit local Xmind mind maps with AI agents",
       "source": "./",
+      "strict": false,
       "skills": [
         "./skills/xmind-file"
       ]
